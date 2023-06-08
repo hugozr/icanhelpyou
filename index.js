@@ -48,4 +48,11 @@ app.get("/clients/:code", async (req, res) => {
   res.json(foundStudent);
 });
 
+app.get("/clients/:dni/by-dni", async (req, res) => {
+  students = await db.collection("clients");
+  const dni = req.params.dni;
+  let foundStudent = await students.findOne({dni });
+  res.json(foundStudent);
+});
+
 startServer();
