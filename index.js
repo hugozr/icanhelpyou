@@ -60,4 +60,12 @@ app.get("/curriculumns", async (req, res) => {
   const found = await curriculums.find().toArray();
   res.json(found);
 });
+
+app.get("/curriculumns/:nivel/by-level", async (req, res) => {
+  curriculums = await db.collection("curriculums");
+  const nivel = req.params.nivel;
+  let foundCurriculums = await curriculums.findOne({nivel });
+  res.json(foundCurriculums);
+});
+
 startServer();
