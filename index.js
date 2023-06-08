@@ -55,4 +55,9 @@ app.get("/clients/:dni/by-dni", async (req, res) => {
   res.json(foundStudent);
 });
 
+app.get("/curriculumns", async (req, res) => {
+  curriculums = await db.collection("curriculums");
+  const found = await curriculums.find().toArray();
+  res.json(found);
+});
 startServer();
