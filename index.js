@@ -32,11 +32,20 @@ const startServer = async () => {
   }
 };
 
-app.get("/datos", async (req, res) => {
-  // students = await db.collection("students");
+app.get("/clients", async (req, res) => {
   students = await db.collection("clients");
   const found = await students.find().toArray();
   res.json(found);
+});
+
+app.get("/clients/:code", async (req, res) => {
+  students = await db.collection("clients");
+  academics = await db.collection("academics");
+  const code = req.params.code;
+  let foundStudent = await students.findOne({code });
+  const foundAcademics = await academics.find({clientCode: code }).toArray();
+  foundStudent.academics = foundAcademics
+  res.json(foundStudent);
 });
 
 startServer();
